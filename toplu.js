@@ -19,26 +19,26 @@ function uploadImageAndGetUrl(imagePath) {
 
 // Ana işlev
 async function backupImages() {
-  try {
-    // Resimler klasöründeki dosya adlarını al
-    const fileNames = getFilesInDirectory(imageFolder);
-
-    // Her bir resmi yedekle ve URL'leri topla
-    const imageUrls = await Promise.all(
-      fileNames.map((fileName) => {
-        const imagePath = path.join(imageFolder, fileName);
-        return uploadImageAndGetUrl(imagePath);
-      })
-    );
-
-    // JSON dosyasına URL'leri kaydet
-    fs.writeFileSync(jsonFilePath, JSON.stringify(imageUrls, null, 2));
-
-    console.log('Resimler yedeklendi ve URL\'ler JSON dosyasına kaydedildi.');
-  } catch (error) {
-    console.error('Hata:', error);
+    try {
+      // Resimler klasöründeki dosya adlarını al
+      const fileNames = getFilesInDirectory(imageFolder);
+  
+      // Her bir resmi yedekle ve URL'leri topla
+      const imageUrls = await Promise.all(
+        fileNames.map((fileName) => {
+          const imagePath = path.join(imageFolder, fileName);
+          return uploadImageAndGetUrl(imagePath);
+        })
+      );
+  
+      // JSON dosyasına URL'leri kaydet
+      fs.writeFileSync(jsonFilePath, JSON.stringify(imageUrls, null, 2));
+  
+      console.log(`Toplam ${imageUrls.length} resim yedeklendi ve URL'ler JSON dosyasına kaydedildi.`);
+    } catch (error) {
+      console.error('Hata:', error);
+    }
   }
-}
-
+  
 // Ana işlevi çağır
 backupImages();
