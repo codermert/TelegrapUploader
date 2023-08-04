@@ -10,7 +10,7 @@ function getFilesInDirectory(dir) {
   return fs.readdirSync(dir);
 }
 
-// Resmi tampon (buffer) verisi olarak yükle ve URL'ini döndür
+// Resmi (buffer) verisi olarak yükle ve URL'ini döndür
 function uploadImageAndGetUrl(imagePath) {
   const imageBuffer = fs.readFileSync(imagePath);
   return uploadByBuffer(imageBuffer, 'image/png')
